@@ -22,3 +22,218 @@ Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/
 mvn spring-boot:run
 ```
 
+## Success Requests examples
+
+**GET ../v1/clientes**
+
+*Response:*
+```shell
+StatusCode: 200
+```
+```json
+[
+    {
+        "id": 1,
+        "nome": "Dodo",
+        "cnpj": "27702708000140",
+        "enderecos": [
+            {
+                "id": 1,
+                "rua": "palmeira do mar, 19",
+                "bairro": "parque das arvores",
+                "cidade": "são paulo",
+                "estado": "sp",
+                "complemento": "casa"
+            }
+        ],
+        "projetos": [
+            {
+                "id": 1,
+                "nome": "generation brasil",
+                "codigo": "123456",
+                "valor": 100.00
+            }
+        ]
+    }
+]
+```
+----------
+**GET ../v1/clientes/{id}**
+
+*Response:*
+```shell
+StatusCode: 200
+```
+```json
+{
+    "id": 1,
+    "nome": "Dodo",
+    "cnpj": "27702708000140",
+    "enderecos": [
+        {
+            "id": 1,
+            "rua": "palmeira do mar, 19",
+            "bairro": "parque das arvores",
+            "cidade": "são paulo",
+            "estado": "sp",
+            "complemento": "casa"
+        }
+    ],
+    "projetos": [
+        {
+            "id": 1,
+            "nome": "generation brasil",
+            "codigo": "123456",
+            "valor": 100.00
+        }
+    ]
+}
+```
+---------
+**POST ../v1/clientes**
+
+*Request:*
+```json
+{
+    "nome": "Dodo",
+    "cnpj": "27702708000140",
+    "enderecos": [
+        {
+            "rua": "palmeira do mar, 19",
+            "bairro": "parque das arvores",
+            "cidade": "são paulo",
+            "estado": "sp",
+            "complemento": "casa"
+        }
+    ],
+    "projetos": [
+        {
+            "nome": "generation brasil",
+            "codigo": "123456",
+            "valor": 100
+        }
+    ]
+}
+```
+
+*Response:*
+```shell
+StatusCode: 200
+```
+```json
+{
+    "id": 1,
+    "nome": "Dodo",
+    "cnpj": "27702708000140",
+    "enderecos": [
+        {
+            "id": 1,
+            "rua": "palmeira do mar, 19",
+            "bairro": "parque das arvores",
+            "cidade": "são paulo",
+            "estado": "sp",
+            "complemento": "casa"
+        }
+    ],
+    "projetos": [
+        {
+            "id": 1,
+            "nome": "generation brasil",
+            "codigo": "123456",
+            "valor": 100.00
+        }
+    ]
+}
+```
+-----------
+**PUT ../v1/clientes**
+
+*Request:*
+```json
+{
+    "id": 1,
+    "nome": "Paloma",
+    "cnpj": "27702708000140",
+    "enderecos": [
+        {
+            "id": 1,
+            "rua": "palmeira do mar, 20",
+            "bairro": "parque das arvores",
+            "cidade": "são paulo",
+            "estado": "sp",
+            "complemento": "casa"
+        }
+    ],
+    "projetos": [
+        {
+            "id": 1,
+            "nome": "generation brasil",
+            "codigo": "123456",
+            "valor": 100
+        },
+        {
+            "id": 2,
+            "nome": "Matematica ONG",
+            "codigo": "1234567890",
+            "valor": 1000
+        }
+    ]
+}
+```
+
+*Response:*
+```shell
+StatusCode: 200
+```
+```json
+{
+    "id": 1,
+    "nome": "Paloma",
+    "cnpj": "27702708000140",
+    "enderecos": [
+        {
+            "id": 1,
+            "rua": "palmeira do mar, 20",
+            "bairro": "parque das arvores",
+            "cidade": "são paulo",
+            "estado": "sp",
+            "complemento": "casa"
+        }
+    ],
+    "projetos": [
+        {
+            "id": 1,
+            "nome": "generation brasil",
+            "codigo": "123456",
+            "valor": 100
+        },
+        {
+            "id": 2,
+            "nome": "Matematica ONG",
+            "codigo": "1234567890",
+            "valor": 1000
+        }
+    ]
+}
+```
+-----------
+**DELETE ../v1/clientes**
+*Response:*
+```shell
+StatusCode: 200
+```
+## Warning Requests examples ##
+
+**ClienteNotFoundException**
+
+*Response:*
+```shell
+StatusCode: 404
+```
+```json
+{
+    "message": "Não foi possivel encontrar o cliente",
+    "statusCode": 404
+}
+```
+
