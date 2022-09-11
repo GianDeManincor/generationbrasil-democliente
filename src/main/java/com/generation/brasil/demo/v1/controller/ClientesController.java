@@ -1,7 +1,9 @@
 package com.generation.brasil.demo.v1.controller;
 
+import com.generation.brasil.demo.exception.ClienteNotFoundException;
 import com.generation.brasil.demo.v1.model.Cliente;
-import com.generation.brasil.demo.v1.services.ClientesService;
+import com.generation.brasil.demo.v1.service.ClientesService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,24 +25,24 @@ public class ClientesController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> getById(@PathVariable("id") Integer id){
-        return ResponseEntity.ok(service.getById(id));
+    public ResponseEntity<Cliente> getById(@PathVariable("id") Integer id) throws ClienteNotFoundException {
+        return new ResponseEntity<>(service.getById(id), HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<Cliente> add(@RequestBody Cliente cliente) {
-        return ResponseEntity.ok(service.add(cliente));
+        return new ResponseEntity<>(service.add(cliente), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> update(@PathVariable("id") Integer id, @RequestBody Cliente cliente) {
-        return ResponseEntity.ok(service.update(id, cliente));
+    public ResponseEntity<Cliente> update(@PathVariable("id") Integer id, @RequestBody Cliente cliente) throws ClienteNotFoundException {
+        return new ResponseEntity<>(service.update(id, cliente), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Integer id) {
         service.delete(id);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
