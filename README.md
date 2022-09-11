@@ -146,7 +146,7 @@ StatusCode: 200
 }
 ```
 -----------
-**PUT ../v1/clientes**
+**PUT ../v1/clientes/{id}**
 
 *Request:*
 ```json
@@ -217,7 +217,7 @@ StatusCode: 200
 }
 ```
 -----------
-**DELETE ../v1/clientes**
+**DELETE ../v1/clientes/{id}**
 *Response:*
 ```shell
 StatusCode: 200
