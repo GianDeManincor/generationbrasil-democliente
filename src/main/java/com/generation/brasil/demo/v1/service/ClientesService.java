@@ -1,11 +1,10 @@
-package com.generation.brasil.demo.v1.services;
+package com.generation.brasil.demo.v1.service;
 
+import com.generation.brasil.demo.exception.ClienteNotFoundException;
 import com.generation.brasil.demo.v1.model.Cliente;
 import com.generation.brasil.demo.v1.repository.ClientesRepository;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,21 +26,21 @@ public class ClientesService {
         return repository.findAll();
     }
 
-    public Cliente getById(Integer id) {
+    public Cliente getById(Integer id) throws ClienteNotFoundException {
         Optional<Cliente> clienteAtual = repository.findById(id);
 
         if(clienteAtual.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente NotFoundException");
+            throw new ClienteNotFoundException("Não foi possivel encontrar o cliente", HttpStatus.NOT_FOUND.value());
         }
 
         return clienteAtual.get();
     }
 
-    public Cliente update(Integer id, Cliente cliente) {
+    public Cliente update(Integer id, Cliente cliente) throws ClienteNotFoundException {
         Optional<Cliente> clienteAtual = repository.findById(id);
 
         if(clienteAtual.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente NotFoundException");
+            throw new ClienteNotFoundException("Não foi possivel encontrar o cliente", HttpStatus.NOT_FOUND.value());
         }
 
         cliente.setId(clienteAtual.get().getId());
