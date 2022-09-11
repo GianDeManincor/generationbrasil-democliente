@@ -40,7 +40,7 @@ public class ClientesController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") Integer id) {
+    public ResponseEntity delete(@PathVariable("id") Integer id) throws ClienteNotFoundException {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
