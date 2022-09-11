@@ -218,6 +218,7 @@ StatusCode: 200
 ```
 -----------
 **DELETE ../v1/clientes/{id}**
+
 *Response:*
 ```shell
 StatusCode: 200
