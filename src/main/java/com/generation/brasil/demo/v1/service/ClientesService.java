@@ -28,26 +28,20 @@ public class ClientesService {
 
     public Cliente getById(Integer id) throws ClienteNotFoundException {
         Optional<Cliente> clienteAtual = repository.findById(id);
-
         if(clienteAtual.isEmpty()) {
             throw new ClienteNotFoundException("Não foi possivel encontrar o cliente", HttpStatus.NOT_FOUND.value());
         }
-
         return clienteAtual.get();
     }
 
     public Cliente update(Integer id, Cliente cliente) throws ClienteNotFoundException {
-        Optional<Cliente> clienteAtual = repository.findById(id);
-
-        if(clienteAtual.isEmpty()) {
-            throw new ClienteNotFoundException("Não foi possivel encontrar o cliente", HttpStatus.NOT_FOUND.value());
-        }
-
-        cliente.setId(clienteAtual.get().getId());
+        Cliente clienteAtual = getById(id);
+        cliente.setId(clienteAtual.getId());
         return repository.save(cliente);
     }
 
-    public void delete(Integer id) {
-        repository.deleteById(id);
+    public void delete(Integer id) throws ClienteNotFoundException {
+        Cliente cliente = getById(id);
+        repository.deleteById(cliente.getId());
     }
 }
